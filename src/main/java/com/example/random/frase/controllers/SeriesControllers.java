@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 public class SeriesControllers {
@@ -15,7 +16,7 @@ public class SeriesControllers {
      private SerieService servico;
 
     @GetMapping("/series/frases")
-    public List<SerieDTO> buscarSeries(){
-       return servico.buscarTodasSeries();
+    public Optional<SerieDTO> buscarSeries(){
+       return servico.buscarSerieAleatoria();
     }
 }

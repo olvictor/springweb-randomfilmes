@@ -7,8 +7,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.Random;
-import java.util.stream.Collectors;
 
 @Service
 public class SerieService {
@@ -18,7 +18,7 @@ public class SerieService {
 
     private Random random = new Random();
 
-    public List<SerieDTO> buscarTodasSeries(){
+    public Optional<SerieDTO> buscarSerieAleatoria(){
         List<Serie> series = repoistorio.findAll().stream().toList();
 
 
@@ -27,7 +27,7 @@ public class SerieService {
 
         return repoistorio.findAll().stream()
                 .filter(s -> s.getId() == (long) numero)
-                .map(s-> new SerieDTO(s.getTitulo(),s.getFrase(),s.getPoster(),s.getPersonagem()))
-                .collect(Collectors.toList());
+                .map(s-> new SerieDTO(s.getTitulo(),s.getFrase(),s.getPersonagem(),s.getPoster()))
+                .findFirst();
     }
 }
